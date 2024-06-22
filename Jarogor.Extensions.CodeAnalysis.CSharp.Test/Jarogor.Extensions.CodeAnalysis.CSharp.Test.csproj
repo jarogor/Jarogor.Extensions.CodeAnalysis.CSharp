@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\EndpointAnalyzer\EndpointAnalyzer.csproj"/>
+        <ProjectReference Include="..\Jarogor.Extensions.CodeAnalysis.CSharp\Jarogor.Extensions.CodeAnalysis.CSharp.csproj" />
     </ItemGroup>
 
 </Project>

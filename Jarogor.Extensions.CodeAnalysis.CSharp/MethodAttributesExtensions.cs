@@ -1,12 +1,13 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace EndpointAnalyzer;
+namespace Jarogor.Extensions.CodeAnalysis.CSharp;
 
-public static class AttributesValueFinderExtensions
+public static class MethodAttributesExtensions
 {
     private const string AttributeSuffix = "Attribute";
 
-    public static IEnumerable<string> Find(this CompilationUnitSyntax root, string name)
+    public static IEnumerable<IEnumerable<AttributeInfo>?> FindMethodsAttributes(this CompilationUnitSyntax root, string name)
     {
         return root
             .GetClassDeclarations()
@@ -15,7 +16,7 @@ public static class AttributesValueFinderExtensions
             .GetAttributesValues();
     }
 
-    private static IEnumerable<ClassDeclarationSyntax> GetClassDeclarations(this CompilationUnitSyntax self)
+    private static IEnumerable<ClassDeclarationSyntax> GetClassDeclarations(this SyntaxNode self)
     {
         return self
             .DescendantNodes()
@@ -61,31 +62,27 @@ public static class AttributesValueFinderExtensions
         return attributeNames.Contains(self.Name.GetText().ToString());
     }
 
-    private static IEnumerable<string> GetAttributesValues(this IEnumerable<AttributeSyntax> self)
+    private static IEnumerable<IEnumerable<AttributeInfo>?> GetAttributesValues(this IEnumerable<AttributeSyntax> self)
     {
         return self
-            .SelectMany(it => it.ArgumentList?.Arguments.ToList() ?? new List<AttributeArgumentSyntax>())
-            .Select(it => it.Expression)
-            .Select(GetValue);
+            .Select(it => it.ArgumentList)
+            .Select(it
+                => (it?.Arguments.ToList() ?? new List<AttributeArgumentSyntax>())
+                .Select((argument, index) => new AttributeInfo(index, argument.GetName(), argument.Expression.GetValue()))
+            );
     }
+
+    private static string GetName(this AttributeArgumentSyntax self)
+        => self.NameColon?.Name.Identifier.ValueText ?? self.NameEquals?.Name.Identifier.ValueText ?? string.Empty;
 
     private static string GetValue(this ExpressionSyntax self)
     {
-        switch (self)
+        return self switch
         {
-            case InvocationExpressionSyntax invocation:
-                // EXAMPLE: nameof(qwerty.foo.bar)
-                //      string[]{ "nameof", "(", "qwerty", ".", "foo", ".", "bar", ")" }
-                //                    0      1       2      3     4     5     6     7
-                //      count: 8
-                //      position: 8 - 6 = 6
-                //      position: 6 — bar
-                var count = invocation.DescendantTokens().Count() - 2;
-                return invocation.DescendantTokens().Skip(count).First().ValueText;
-            case LiteralExpressionSyntax literal:
-                return literal.Token.ValueText;
-            default:
-                return string.Empty;
-        }
+            // EXAMPLE: nameof(qwerty.foo.bar) -> qwerty.foo.bar -> last: bar
+            InvocationExpressionSyntax invocation => invocation.DescendantNodes().Last().GetLastToken().ValueText,
+            LiteralExpressionSyntax literal => literal.Token.ValueText,
+            _ => string.Empty,
+        };
     }
 }

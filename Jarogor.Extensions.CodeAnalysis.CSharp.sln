@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndpointAnalyzer", "EndpointAnalyzer\EndpointAnalyzer.csproj", "{7ED2BA74-B065-4ED2-AD9C-F8EEBC919D1B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jarogor.Extensions.CodeAnalysis.CSharp", "Jarogor.Extensions.CodeAnalysis.CSharp\Jarogor.Extensions.CodeAnalysis.CSharp.csproj", "{7ED2BA74-B065-4ED2-AD9C-F8EEBC919D1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndpointAnalyzerTest", "EndpointAnalyzerTest\EndpointAnalyzerTest.csproj", "{F4D077CC-0892-402B-9BB1-2B67606F043F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jarogor.Extensions.CodeAnalysis.CSharp.Test", "Jarogor.Extensions.CodeAnalysis.CSharp.Test\Jarogor.Extensions.CodeAnalysis.CSharp.Test.csproj", "{F4D077CC-0892-402B-9BB1-2B67606F043F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

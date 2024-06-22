@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndpointAnalyzer", "EndpointAnalyzer\EndpointAnalyzer.csproj", "{7ED2BA74-B065-4ED2-AD9C-F8EEBC919D1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndpointAnalyzerTest", "EndpointAnalyzerTest\EndpointAnalyzerTest.csproj", "{F4D077CC-0892-402B-9BB1-2B67606F043F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{7ED2BA74-B065-4ED2-AD9C-F8EEBC919D1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7ED2BA74-B065-4ED2-AD9C-F8EEBC919D1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7ED2BA74-B065-4ED2-AD9C-F8EEBC919D1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4D077CC-0892-402B-9BB1-2B67606F043F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4D077CC-0892-402B-9BB1-2B67606F043F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4D077CC-0892-402B-9BB1-2B67606F043F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4D077CC-0892-402B-9BB1-2B67606F043F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

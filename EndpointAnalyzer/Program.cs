@@ -1,3 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using EndpointAnalyzer;
+using Microsoft.CodeAnalysis.CSharp;
 
-Console.WriteLine("Hello, World!");
+var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(@"F:\code\dotnet\EndpointAnalyzer\EndpointAnalyzer\HelloWorld.cs"));
+
+var root = tree.GetCompilationUnitRoot();
+foreach (var value in root.Find("QwertyAttribute"))
+{
+    Console.WriteLine(value);
+}

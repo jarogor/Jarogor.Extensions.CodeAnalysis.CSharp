@@ -12,7 +12,7 @@ public static class MethodAttributesExtensions
         return root
             .GetClassDeclarations()
             .GetMethodDeclarations()
-            .GetAttributes(name)
+            .GetAttributes(name.Trim())
             .GetAttributesValues();
     }
 
@@ -59,7 +59,7 @@ public static class MethodAttributesExtensions
             attributeNames[1] = $"{name}{AttributeSuffix}";
         }
 
-        return attributeNames.Contains(self.Name.GetText().ToString());
+        return attributeNames.Contains(self.Name.NormalizeWhitespace().GetText().ToString());
     }
 
     private static IEnumerable<IEnumerable<AttributeInfo>?> GetAttributesValues(this IEnumerable<AttributeSyntax> self)

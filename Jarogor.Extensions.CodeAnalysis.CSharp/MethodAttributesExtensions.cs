@@ -10,13 +10,13 @@ public static class MethodAttributesExtensions
     public static IEnumerable<IEnumerable<AttributeInfo>?> FindMethodsAttributes(this CompilationUnitSyntax root, string name)
     {
         return root
-            .GetClassDeclarations()
-            .GetMethodDeclarations()
-            .GetAttributes(name.Trim())
-            .GetAttributesValues();
+            .GetClassDeclarationSyntaxList()
+            .GetMethodDeclarationSyntaxList()
+            .GetAttributeSyntaxList(name.Trim())
+            .GetAttributeInfoList();
     }
 
-    private static IEnumerable<ClassDeclarationSyntax> GetClassDeclarations(this SyntaxNode self)
+    private static IEnumerable<ClassDeclarationSyntax> GetClassDeclarationSyntaxList(this SyntaxNode self)
     {
         return self
             .DescendantNodes()
@@ -24,7 +24,7 @@ public static class MethodAttributesExtensions
             .Cast<ClassDeclarationSyntax>();
     }
 
-    private static IEnumerable<MethodDeclarationSyntax> GetMethodDeclarations(this IEnumerable<ClassDeclarationSyntax> self)
+    private static IEnumerable<MethodDeclarationSyntax> GetMethodDeclarationSyntaxList(this IEnumerable<ClassDeclarationSyntax> self)
     {
         return self
             .SelectMany(it => it.ChildNodes())
@@ -36,7 +36,7 @@ public static class MethodAttributesExtensions
     private static bool IsPublic(this MethodDeclarationSyntax it)
         => it.Modifiers.Any(t => t.ValueText == "public");
 
-    private static IEnumerable<AttributeSyntax> GetAttributes(this IEnumerable<MethodDeclarationSyntax> self, string name)
+    private static IEnumerable<AttributeSyntax> GetAttributeSyntaxList(this IEnumerable<MethodDeclarationSyntax> self, string name)
     {
         return self
             .SelectMany(it => it.DescendantNodes().OfType<AttributeListSyntax>())
@@ -62,7 +62,7 @@ public static class MethodAttributesExtensions
         return attributeNames.Contains(self.Name.NormalizeWhitespace().GetText().ToString());
     }
 
-    private static IEnumerable<IEnumerable<AttributeInfo>?> GetAttributesValues(this IEnumerable<AttributeSyntax> self)
+    private static IEnumerable<IEnumerable<AttributeInfo>?> GetAttributeInfoList(this IEnumerable<AttributeSyntax> self)
     {
         return self
             .Select(it => it.ArgumentList)

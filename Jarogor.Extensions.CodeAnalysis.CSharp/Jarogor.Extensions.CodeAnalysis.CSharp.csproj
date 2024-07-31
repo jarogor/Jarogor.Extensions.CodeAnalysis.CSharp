@@ -1,9 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>netstandard2.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <LangVersion>12</LangVersion>
+        <PackageId>Jarogor.Extensions.CodeAnalysis.CSharp</PackageId>
+        <PackageDescription>Методы расширения Roslyn анализатора для C#</PackageDescription>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <OutputPath>$(SolutionDir)\bin\Debug\</OutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <OutputPath>$(SolutionDir)\bin\Release\</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>

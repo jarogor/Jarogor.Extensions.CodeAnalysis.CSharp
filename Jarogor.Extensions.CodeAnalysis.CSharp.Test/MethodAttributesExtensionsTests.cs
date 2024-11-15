@@ -43,11 +43,27 @@ public class MethodAttributesExtensionsTests {
           """;
 
     private static readonly List<List<AttributeInfo>> Expected = [
-        [new(0, string.Empty, "1")],
-        [new(0, string.Empty, "2"), new(1, "Foo", "2")],
-        [new(0, string.Empty, "3"), new(1, "Foo", "3"), new(2, "Bar", "3")],
-        [new(0, "name", "4"), new(1, "Bar", "4"), new(2, "Foo", "4")],
-        [new(0, string.Empty, "Do2"), new(1, "Bar", "5")],
+        [
+            new AttributeInfo(0, string.Empty, "1")
+        ],
+        [
+            new AttributeInfo(0, string.Empty, "2"),
+            new AttributeInfo(1, "Foo", "2"),
+        ],
+        [
+            new AttributeInfo(0, string.Empty, "3"),
+            new AttributeInfo(1, "Foo", "3"),
+            new AttributeInfo(2, "Bar", "3"),
+        ],
+        [
+            new AttributeInfo(0, "name", "4"),
+            new AttributeInfo(1, "Bar", "4"),
+            new AttributeInfo(2, "Foo", "4"),
+        ],
+        [
+            new AttributeInfo(0, string.Empty, "Do2"),
+            new AttributeInfo(1, "Bar", "5"),
+        ],
     ];
 
     private CompilationUnitSyntax? _root;

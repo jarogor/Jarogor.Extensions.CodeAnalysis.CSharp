@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Jarogor.Extensions.CodeAnalysis.CSharp;
@@ -36,7 +37,7 @@ public static class MethodAttributesExtensions {
             .Where(IsPublic);
 
     private static bool IsPublic(this MethodDeclarationSyntax it)
-        => it.Modifiers.Any(t => t.ValueText == "public");
+        => it.Modifiers.Any(t => t.IsKind(SyntaxKind.PublicKeyword));
 
     private static IEnumerable<AttributeSyntax> GetAttributeSyntaxList(this IEnumerable<MethodDeclarationSyntax> self, string name)
         => self

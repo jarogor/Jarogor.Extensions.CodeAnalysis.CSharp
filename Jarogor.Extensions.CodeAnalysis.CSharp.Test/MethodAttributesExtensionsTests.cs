@@ -78,7 +78,7 @@ public class MethodAttributesExtensionsTests
 
     [TestCase(" Qwerty ")]
     [TestCase(" QwertyAttribute ")]
-    public void TestFindAttributeValues(string attrName)
+    public void FindMethodsAttributes_SuccessFound(string attrName)
     {
         List<IEnumerable<AttributeInfo>> attributes = _root!.FindMethodsAttributes(attrName).ToList();
         Assert.That(attributes, Has.Count.EqualTo(Expected.Count));

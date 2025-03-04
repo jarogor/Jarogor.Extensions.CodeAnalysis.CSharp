@@ -1,7 +1,7 @@
 ﻿namespace Jarogor.Extensions.CodeAnalysis.CSharp;
 
 /// <summary>
-/// Информация об атрибуте.
+///     Информация об атрибуте.
 /// </summary>
 /// <param name="Position">Позиция параметра</param>
 /// <param name="Name">Название параметра</param>

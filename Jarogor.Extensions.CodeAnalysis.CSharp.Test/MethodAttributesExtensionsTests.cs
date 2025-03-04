@@ -3,7 +3,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Jarogor.Extensions.CodeAnalysis.CSharp.Test;
 
-public class MethodAttributesExtensionsTests {
+public class MethodAttributesExtensionsTests
+{
     private const string CSharpCode
         = """
           using System;
@@ -42,9 +43,10 @@ public class MethodAttributesExtensionsTests {
           }
           """;
 
-    private static readonly List<List<AttributeInfo>> Expected = [
+    private static readonly List<List<AttributeInfo>> Expected =
+    [
         [
-            new AttributeInfo(0, string.Empty, "1")
+            new AttributeInfo(0, string.Empty, "1"),
         ],
         [
             new AttributeInfo(0, string.Empty, "2"),
@@ -70,21 +72,26 @@ public class MethodAttributesExtensionsTests {
 
     [SetUp]
     public void SetUp()
-        => _root = CSharpSyntaxTree.ParseText(CSharpCode).GetCompilationUnitRoot();
+    {
+        _root = CSharpSyntaxTree.ParseText(CSharpCode).GetCompilationUnitRoot();
+    }
 
     [TestCase(" Qwerty ")]
     [TestCase(" QwertyAttribute ")]
-    public void TestFindAttributeValues(string attrName) {
-        var attributes = _root!.FindMethodsAttributes(attrName).ToList();
+    public void TestFindAttributeValues(string attrName)
+    {
+        List<IEnumerable<AttributeInfo>> attributes = _root!.FindMethodsAttributes(attrName).ToList();
         Assert.That(attributes, Has.Count.EqualTo(Expected.Count));
 
-        for (var a = 0; a < attributes.Count; a++) {
+        for (int a = 0; a < attributes.Count; a++)
+        {
             Assert.That(attributes[a], Is.Not.Null);
 
-            var args = attributes[a]!.ToList();
+            List<AttributeInfo> args = attributes[a]!.ToList();
             Assert.That(args, Has.Count.EqualTo(Expected[a].Count));
 
-            for (var b = 0; b < args.Count; b++) {
+            for (int b = 0; b < args.Count; b++)
+            {
                 Assert.That(args[b], Is.EqualTo(Expected[a][b]));
             }
         }
